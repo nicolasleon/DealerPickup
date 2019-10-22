@@ -1,0 +1,20 @@
+{strip}
+    {loop type="order" name="delivery-address" id=$order_id}
+        {loop type="order_address" name="order-addres" id=$DELIVERY_ADDRESS}
+            {assign var="zipcode" value="{$ZIPCODE}"}
+            {loop type="country" name="country" id=$COUNTRY}
+                {assign var="country" value="{$TITLE}"}
+            {/loop}
+            {$FIRSTNAME} {$LASTNAME}<br>
+            {$ADDRESS1}<br>
+            {if $ADDRESS2}
+                {$ADDRESS2}<br>
+            {/if}
+            {if $ADDRESS3}
+                {$ADDRESS3}<br>
+            {/if}
+            {$ZIPCODE} {$CITY}<br>
+            {$country}
+        {/loop}
+    {/loop}
+{/strip}

@@ -1,0 +1,20 @@
+{strip}
+    {loop type="module" name="selected-store" id={order attr="delivery_module"} code="dealerpickup"}
+        {loop type="dealer" name="dealer-store-list" id=$address_id}
+            <div class="panel panel-default col-sm-6">
+                <div class="panel-heading"><b>{intl l="Pick up from store" d="dealerpickup.fo.default"}</b></div>
+                <div class="panel-body">
+                    <span class="org">{$TITLE}</span>
+                    <address class="adr">
+                        <span class="street-address">{$ADDRESS1|upper}</span><br>
+                        <span class="postal-code">{$ZIPCODE}</span>&nbsp;
+                        <span class="locality">{$CITY|upper} - France</span>
+                    </address>
+                    <p>
+                        <a href="{url path="magasins" store_id=$ID}" target="_blank">{intl l="Opening hours" d="dealerpickup.fo.default"}</a>
+                    </p>
+                </div>
+            </div>
+        {/loop}
+    {/loop}
+{/strip}

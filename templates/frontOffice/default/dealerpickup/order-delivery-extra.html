@@ -1,0 +1,60 @@
+<script type="text/html" id="dealerpickup_ui">
+    <td colspan="3">
+        <div class="row">
+            <div class="col-sm-4">
+                <label for="dealerpickup">
+                    {form name="thelia.order.delivery"}
+                        {form_field field='delivery-module'}
+                        <label for="delivery-method_{$module_id}">
+                            <input type="radio" data-dealer-pickup-mode="store" name="{$name}" id="delivery-method_{$module_id}" value="{$module_id}">
+                            <strong>{intl l="Pick up from store" d="dealerpickup.fo.default"}</strong>
+                            <br>
+                            <span class="help-block">
+                                {intl l="Pick up from store at no cost" d="dealerpickup.fo.default"}
+                            </span>
+                        </label>
+                        {/form_field}
+                    {/form}
+                </label>
+            </div>
+
+            <div class="col-sm-4 hidden-xs text-center">
+                {loop type="image" name="deliveryspicture" source="module" source_id=$module_id force_return="true" width="100" height="72"}
+                    <img src="{$IMAGE_URL nofilter}" alt="{$TITLE}">
+                {/loop}
+            </div>
+
+            <div class="col-sm-4">
+                <div class="price text-right">
+                    {format_money number=$postage_amount symbol={currency attr='symbol'}}
+                </div>
+            </div>
+        </div>
+
+        <div id="dealer-pickup-store-list">
+            <h6>{intl l="Our stores list" d="dealerpickup.fo.default"}</h6>
+            <table width="100%">
+                {loop type="dealer" name="dealer-pickup-store-list"}
+                    <tr>
+                        <td width="20%"><input type="radio" name="{$session_selected_dealer_id}" value="{$ID}">{$TITLE}</td>
+                        <td width="20%">{$ADDRESS1|upper} {$ZIPCODE} {$CITY|upper}</td>
+                        <td width="20%" class="text-right"><a href="{url path='/magasins' store_id=$ID}" target="_blank">{intl l="Opening hours" d="dealerpickup.fo.default"}</a></td>
+                    </tr>
+                {/loop}
+            </table>
+        </div>
+    </td>
+</script>
+
+<script>
+    $("#delivery-module-{$module_id}").html($('#dealerpickup_ui').html());
+    $('#dealer-pickup-store-list').hide();
+
+    $('input[type=radio]').click(function(e) {
+        if ($('[data-dealer-pickup-mode=store]').is(':checked')) {
+            $('#dealer-pickup-store-list').slideDown('fast')
+        } else {
+            $('#dealer-pickup-store-list').slideUp('fast')
+        }
+    });
+</script>

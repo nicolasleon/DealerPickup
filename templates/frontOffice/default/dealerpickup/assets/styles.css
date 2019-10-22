@@ -1,0 +1,7 @@
+/*  Hide the dealers store list */
+#dealer-pickup-store-list {
+	display: none;
+}
+.store-details-link {
+	color: #f00;
+}
